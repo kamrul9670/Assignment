@@ -115,11 +115,10 @@ import { AgChartOptions } from 'ag-charts-community';
   
 </div>
 
-<!-- <div class="graph">
+<div class="graph">
 
-
-    <div class="column2"> 
-        <ag-charts-angular
+<div class="column2"> 
+        <!-- <ag-charts-angular
         style="height: 100%"
         [options]="options"
         ></ag-charts-angular> 
@@ -128,11 +127,12 @@ import { AgChartOptions } from 'ag-charts-community';
         <ag-charts-angular
         style="height: 100%"
         [options]="optionsk"
-        ></ag-charts-angular>     
+        ></ag-charts-angular>      -->
     </div>
 
-   </div> -->
- 
+
+   </div> 
+   <router-outlet></router-outlet>
 
   `,
   styles: [
@@ -276,7 +276,7 @@ body{
     /* border: 1px solid greenyellow; */
     width: 98%;
     margin-left: 1%;
-    height: 120px;
+    height: 200px;
     overflow: hidden;
     margin-top: 10px;
     background-color: #fffefc;
@@ -403,20 +403,36 @@ body{
 
 
 
-export class LiveDashboardComponent {
- 
- 
- 
+
+export class LiveDashboardComponent implements OnInit, OnDestroy {
   private dataUpdateInterval: any;
   public options: AgChartOptions;
   public optionsk: AgChartOptions;
 
-  constructor(){
-    this.options ={}
-    this.optionsk={}
+  constructor() {
+    this.options = this.createDefaultChartOptions(); // Initialize with default chart options
+    this.optionsk = this.createDefaultChartOptions(); // Initialize with default chart options
   }
 
-  changeValue(){
+  createDefaultChartOptions(): AgChartOptions {
+    return {
+      autoSize: true,
+      title: {
+        text: 'Power (KW)',
+      },
+      data: [],
+      series: [
+        {
+          xKey: 'time',
+          yKey: 'spending',
+        },
+      ],
+    };
+  }
+
+  changeValue() {
+    // Your data update logic here
+
     this.options = {
       autoSize: true,
       title: {
@@ -468,8 +484,17 @@ export class LiveDashboardComponent {
 
     };
 
+
+
+
   }
-  changeValueForSecondGraph(){
+
+  changeValueForSecondGraph() {
+    // Your data update logic for the second graph here
+
+
+
+
     this.optionsk = {
       autoSize: true,
       title: {
@@ -521,16 +546,23 @@ export class LiveDashboardComponent {
 
     };
 
+
   }
+
   ngOnDestroy(): void {
     clearInterval(this.dataUpdateInterval);
   }
+
   ngOnInit(): void {
     this.dataUpdateInterval = setInterval(() => {
-      console.log("123456")
+      console.log('Data updating...');
       this.changeValue();
       this.changeValueForSecondGraph();
-    }, 2000); 
+    }, 2000);
   }
 }
+
+
+
+
 
