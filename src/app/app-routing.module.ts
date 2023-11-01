@@ -5,7 +5,7 @@ import { LiveDashboardComponent } from './live-dashboard/live-dashboard.componen
 const routes: Routes = [
 
 
-  { path: 'app-live-dashboard', component: LiveDashboardComponent },
+  { path: 'dashboard', component: LiveDashboardComponent }, 
 
 
   

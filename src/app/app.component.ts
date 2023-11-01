@@ -46,6 +46,7 @@ import {  FormControlName } from '@angular/forms';
       </form>
     </div>
 
+    <router-outlet></router-outlet>
 
 
 
@@ -203,7 +204,8 @@ export class AppComponent {
       alert('Success');
   
       // Navigate to the Dashboard component
-      this.router.navigate(['app-live-dashboard']); // Replace 'dashboard' with the actual route to your Dashboard component
+    
+      this.router.navigate(['/dashboard']); // Replace 'dashboard' with the actual route to your Dashboard component
     }
 
 
